@@ -9,12 +9,16 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @user = current_user
     @book = Book.new
+    @books = Book.all
+  end
 
   def edit
   end
 
   def update
+    @user.user_id = current_user.id
     if @user.update(user_params)
       redirect_to users_path(@user), notice: "You have updated user successfully."
     else
